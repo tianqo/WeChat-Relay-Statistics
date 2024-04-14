@@ -18,6 +18,7 @@ if os.path.exists(directory):
         if user_input.lower() == '1':
             import subprocess
             subprocess.run(["python", "UUID/OUTPUT.py"])
+            sys.exit(0)
             #print("你输入了 '1'。")
             i = 1
         elif user_input.lower() == '2':
@@ -35,6 +36,7 @@ else:
         if user_input.lower() == 'y':
             import subprocess
             subprocess.run(["python", "UUID/OUTPUT.py"])
+            sys.exit(0)
             # print("你输入了 '1'。")
             i = 1
         elif user_input.lower() == 'n':
