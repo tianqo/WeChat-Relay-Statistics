@@ -5,7 +5,7 @@ import os
 random_uuid = uuid.uuid4()  
   
 # 定义保存UUID的目录  
-directory = 'UUID/uuids'
+directory = 'code/UUID/uuids'
 if not os.path.exists(directory):  
     os.makedirs(directory)  
   
@@ -17,4 +17,4 @@ file_path = os.path.join(directory, filename)
 with open(file_path, 'w') as file:  
     file.write(str(random_uuid))  
   
-print(f"你的UUID为：{random_uuid} 请将此UUID黏贴于微信接龙备注末尾\n\nUUID若遗忘，文件保存在 {file_path} 中\n\n注意：若无法找回UUID可以重新生成一条新的UUID重新放置于备注末尾")
+print(f"你的UUID为：{random_uuid} 请将此UUID黏贴于微信接龙备注末尾\n\nUUID若遗忘，文件保存在 {file_path} 中\n\n注意：若无法找回UUID可以重新生成一条新的UUID重新放置于备注末尾（此操作将会在后续更新后不可用）")

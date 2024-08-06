@@ -1,3 +1,16 @@
+---
+title: "WeChat Relay Statistics"
+author: "tianqo"
+date: "2024-08-06"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    mainfont: SimSun  # 指定主字体为宋体
+    sansfont: SimHei  # 指定无衬线字体为黑体
+    monofont: "Courier New"  # 指定等宽字体
+    CJKoptions: BoldFont=SimHei, ItalicFont=KaiTi  # 指定CJK字体的加粗和斜体
+---
+
 # WeChat Relay Statistics
 # 微信接龙统计程序
 微信接龙永远只是一个接龙...没错..一个txt文档<br />

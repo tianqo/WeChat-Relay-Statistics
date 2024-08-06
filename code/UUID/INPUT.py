@@ -29,7 +29,7 @@ if len(lines) >= 2:
     else:
         print("未找到有效的UUID")
 else:
-    print("文件行数不足")
+    print("文件行数不足,检查文档是否少复制或有其他缺漏")
 
 #小文件识别
 '''
@@ -62,7 +62,7 @@ with open('yourfile.txt', 'r', encoding='utf-8') as file:
 '''
 
 # 定义uuids目录的路径
-uuids_directory = 'UUID/uuids'
+uuids_directory = 'code/UUID/uuids'
 
 # 构建完整路径
 uuid_path = os.path.join(uuids_directory, uuid_part + ".txt")
