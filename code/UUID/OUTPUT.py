@@ -5,7 +5,7 @@ import os
 random_uuid = uuid.uuid4()  
   
 # 定义保存UUID的目录  
-directory = 'UUID/uuids'
+directory = 'code/UUID/uuids'
 if not os.path.exists(directory):  
     os.makedirs(directory)  
   

@@ -62,7 +62,7 @@ with open('yourfile.txt', 'r', encoding='utf-8') as file:
 '''
 
 # 定义uuids目录的路径
-uuids_directory = 'UUID/uuids'
+uuids_directory = 'code/UUID/uuids'
 
 # 构建完整路径
 uuid_path = os.path.join(uuids_directory, uuid_part + ".txt")

@@ -5,7 +5,7 @@ import openpyxl
 import re
 
 # 定义目录路径
-directory = 'UUID/uuids'
+directory = 'code/UUID/uuids'
 i = 0
 
 # 检查目录是否存在
@@ -17,13 +17,13 @@ if os.path.exists(directory):
     while i < 1:
         if user_input.lower() == '1':
             import subprocess
-            subprocess.run(["python", "UUID/OUTPUT.py"])
+            subprocess.run(["python", "code/UUID/OUTPUT.py"])
             sys.exit(0)
             #print("你输入了 '1'。")
             i = 1
         elif user_input.lower() == '2':
             import subprocess
-            subprocess.run(["python", "UUID/INPUT.py"])
+            subprocess.run(["python", "code/UUID/INPUT.py"])
             #print("你输入了 '2'。")
             i = 1
         else:
@@ -35,7 +35,7 @@ else:
     while i < 1:
         if user_input.lower() == 'y':
             import subprocess
-            subprocess.run(["python", "UUID/OUTPUT.py"])
+            subprocess.run(["python", "code/UUID/OUTPUT.py"])
             sys.exit(0)
             # print("你输入了 '1'。")
             i = 1
@@ -49,7 +49,7 @@ else:
 
 #开始统计
 # txt文件路径和Excel文件路径
-txt_file_path = 'UUID/yourfile.txt'
+txt_file_path = 'code/UUID/yourfile.txt'
 excel_file_path = 'output.xlsx'
 
 # 初始化Excel工作簿和工作表
