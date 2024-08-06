@@ -30,14 +30,13 @@ output:
 ## 使用方法： <br />
 ### 环境 <br />
 ### requirement <br />
-    python 3.12
     openpyxl
 ### 执行： <br />
-确保自己已经完全下载了本代码并且进入了code文件夹环境，然后使用cmd执行以下代码：<br />
+确保自己已经完全下载了本代码并且进入了文件夹根目录，然后使用cmd执行以下代码：<br />
 ```
 python logic.py
 ```
-但由于一些不可抗力的因素，我推荐还是使用如下方法：<br />
+但我推荐还是使用如下方法：<br />
 ![image](https://github.com/tianqo/WeChat-Relay-Statistics/assets/68796895/24ffae61-2b03-4bb4-bf60-99824a4c0475)<br />
 使用idle打开logic.py文件并执行（没错这样更方便）<br />
 ![image](https://github.com/tianqo/WeChat-Relay-Statistics/assets/68796895/fda7037b-e60a-4a65-b097-96175dd700a5)<br />
