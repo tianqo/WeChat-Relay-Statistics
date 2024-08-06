@@ -17,7 +17,7 @@ if os.path.exists(directory):
     while i < 1:
         if user_input.lower() == '1':
             import subprocess
-            subprocess.run(["python", "UUID/OUTPUT.py"])
+            subprocess.run(["python", "code/UUID/OUTPUT.py"])
             sys.exit(0)
             #print("你输入了 '1'。")
             i = 1
