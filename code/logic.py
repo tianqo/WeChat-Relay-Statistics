@@ -5,49 +5,28 @@ import openpyxl
 import re
 
 # 定义目录路径
-directory = 'code/UUID/uuids'
 i = 0
-
+if not os.path.exists('code/UUID/uuids'):
+    print("这是你第一次使用本程序，请仔细阅读readme文件后使用。")
 # 检查目录是否存在
-if os.path.exists(directory):
     # 获取用户输入
-    user_input = input("进行新的接龙统计(1)还是进行已完成接龙的统计(2)?\n请输入 '1' 或 '2': ")
+user_input = input("开始统计？\n请输入 'y' 或 'n': ")
 
-    # 使用 if-elif-else 语句检查输入
-    while i < 1:
-        if user_input.lower() == '1':
-            import subprocess
-            subprocess.run(["python", "code/UUID/OUTPUT.py"])
-            sys.exit(0)
-            #print("你输入了 '1'。")
-            i = 1
-        elif user_input.lower() == '2':
-            import subprocess
-            subprocess.run(["python", "code/UUID/INPUT.py"])
-            #print("你输入了 '2'。")
-            i = 1
-        else:
-            user_input = input("你输入的不是 '1' 也不是 '2'。请重新输入：")
-else:
-    # 如果目录不存在，则打印消息并可能创建它
-    print("这是你首次使用此统计程序，使用前请仔细阅读readme文件。确认使用后将会生成一条UUID，请放置于微信接龙备注的末尾以便识别")
-    user_input = input("是否进行新一轮统计？\n请输入 'y' 或 'n'：")
-    while i < 1:
-        if user_input.lower() == 'y':
-            import subprocess
-            subprocess.run(["python", "code/UUID/OUTPUT.py"])
-            sys.exit(0)
-            # print("你输入了 '1'。")
-            i = 1
-        elif user_input.lower() == 'n':
-            sys.exit(0)
-            i = 1
-        else:
-            user_input = input("你输入的不是 'y' 也不是 'n'。请重新输入：")
-    # 如果需要，可以创建目录
-    # os.makedirs(directory)
+# 使用 if-elif-else 语句检查输入
+while i < 1:
+    if user_input.lower() == 'y':
+        import subprocess
+        subprocess.run(["python", "code/UUID/OUTPUT.py"])
+        #print("你输入了 '1'。")
+        i = 1
+    elif user_input.lower() == 'n':
+        sys.exit(0)
+        i = 1
+    else:
+         user_input = input("你输入的不是 '1' 也不是 '2'。请重新输入：")
 
 #开始统计
+print("开始统计")
 # txt文件路径和Excel文件路径
 txt_file_path = 'code/UUID/yourfile.txt'
 excel_file_path = 'output.xlsx'
