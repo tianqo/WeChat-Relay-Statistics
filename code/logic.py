@@ -1,9 +1,7 @@
 import os
 import sys
-from openpyxl import Workbook
-import openpyxl
 import re
-
+import csv
 # 定义目录路径
 i = 0
 if not os.path.exists('code/UUID/uuids'):
@@ -25,52 +23,54 @@ while i < 1:
     else:
          user_input = input("你输入的不是 '1' 也不是 '2'。请重新输入：")
 
-#开始统计
-print("开始统计")
-# txt文件路径和Excel文件路径
-txt_file_path = 'code/UUID/yourfile.txt'
-excel_file_path = 'output.xlsx'
-
-# 初始化Excel工作簿和工作表
-wb = Workbook()
-ws = wb.active
-ws.title = 'Contents'
-
-# 读取txt文件内容，从第四行开始
-with open(txt_file_path, 'r', encoding='utf-8') as file:
-    lines = file.readlines()
-    current_line_index = 3  # 从第四行开始
-    while current_line_index < len(lines):
-        line = lines[current_line_index].strip()
-
-        # 匹配序号及其后的内容
-        match = re.match(r'^(\d+)\.\s(.*?)\s(.*)$', line)
+print("开始统计...")
+pattern = r'^\d+\.\s+\S+'
+i = 0
+csv_rows = []
+# 从txt文档的第四行开始读取数据
+with open('code/UUID/yourfile.txt', 'r', encoding='utf-8') as f:
+    for line in f:
+        match = re.match(r'^\d+\.\s+(.*)', line)
         if match:
-            # 提取序号和元素
-            sequence_number = int(match.group(1))
-            element_between_spaces = match.group(2).strip()
-            element_after_second_space = match.group(3).strip()
-
-            # 填充到Excel表格中
-            # 如果序号对应的行不存在，则创建新行
-            if sequence_number > ws.max_row:
-                ws.append([])  # 添加新行
-
-            # 将元素填充到对应的列中
-            ws.cell(row=sequence_number, column=1, value=element_between_spaces)
-            ws.cell(row=sequence_number, column=2, value=element_after_second_space)
-
-            # 序号下一行的所有元素依次填入后续列
-            column = 3
-            while current_line_index + 1 < len(lines) and not re.match(r'^\d+\.', lines[current_line_index + 1]):
-                current_line_index += 1
-                line_content = lines[current_line_index].strip()
-                ws.cell(row=sequence_number, column=column, value=line_content)
-                column += 1
+            # match.group(1) 现在包含了序号和点号之后的所有内容
+            # 我们进一步按空格分割这部分内容
+            sub_parts = match.group(1).split(' ', -1)  # 使用split的maxsplit参数来确保只分割一次
+            
+            # 现在，sub_parts[0] 是第一列的内容，如果sub_parts有第二个元素，则它是第二列的内容
+            if len(sub_parts) > 1:
+                csv_rows.append(sub_parts)
+            else:
+                # 如果只有一个部分，我们可能想要在第二列中放入一个空字符串或占位符
+                csv_rows.append([sub_parts[0], ''])
         else:
-            # 如果当前行不是序号，则跳过这一行
-            current_line_index += 1
+            # 如果行不匹配我们的模式，我们可以选择忽略它或记录下来
+            print(f"忽略不符合条件的行: {line}")
 
-        # 保存Excel文件
-wb.save(excel_file_path)
-print(f"内容已填充到Excel文件: {excel_file_path}")
+# 写入CSV文件
+if os.path.exists('output.csv'):
+    os.remove('output.csv')
+with open('output.csv', 'w', newline='', encoding='utf-8') as csv_file:
+    writer = csv.writer(csv_file)
+    # 写入列标题（如果需要）
+    # writer.writerow(['Column1', 'Column2'])
+    # 写入数据行
+    for row in csv_rows:
+        writer.writerow(row)
+
+# 最后处理
+input_file = 'output.csv'
+output_file = 'corrected_output.csv'
+
+# 使用csv.reader读取文件
+with open(input_file, 'r', newline='', encoding='utf-8') as infile:
+    lines = infile.readlines()
+
+# 使用文件写入方式写入新文件
+with open(input_file, 'w', newline='', encoding='utf-8') as outfile:
+    for line in lines:
+        # 替换连续的逗号为单个逗号
+        cleaned_line = ','.join(filter(None, line.split(','))).strip() + '\n'
+        # 写入处理后的行
+        outfile.write(cleaned_line)
+
+print(f"内容已填充到csv文件")

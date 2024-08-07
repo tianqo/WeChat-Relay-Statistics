@@ -1,32 +1,22 @@
 # 测试程序可行性
 # 用于对已经排序玩的excel文件进行统计
+import os
+import pandas as pd
+import jieba as jb
+# 定义路径
+csv_path = "code/UUID/output.csv"
+txt_path = "code/UUID/yourfile.txt"
+#将xlsx文件转换为csv文件并暂存如UUID文件夹中
+# 如果csv文件存在则删除
+if os.path.exists("code/UUID/output.csv"):
+    os.remove("code/UUID/output.csv")
+data_xlsx = pd.read_excel("output.xlsx")
+data_xlsx.to_csv("code/UUID/output.csv",encoding = 'utf-8')
 
-#读取output.xlsx文件,并提取关键词
-# 统计关键词出现的次数
-import xlrd
-from collections import Counter
-def get_data(file):
-    workbook = xlrd.open_workbook(file)
-    sheet = workbook.sheets()[0]
-    rows = sheet.nrows
-    cols = sheet.ncols
-    data = []
-    for i in range(1, rows):
-        row = sheet.row_values(i)
-        data.append(row[2])
-    return data
-def count_words(data):
-    word_list = []
-    for line in data:
-        line = line.replace(" ", "")
-        line = line.split(",")
-        for word in line:
-            if len(word) > 3 and word not in word_list:
-                word_list.append(word)
-    counter = Counter(word_list)
-    print(counter)
-    return counter
-def main():
-    data = get_data('output.xlsx')
-    count_words(data)
-main()
+# 将csv文件的第三列复制入yourfile.txt中
+# 如果yourfile.txt存在则删除
+if os.path.exists(txt_path):
+    os.remove(txt_path)
+data = pd.read_csv(csv_path,encoding='utf-8')
+data = data.iloc[:,2]
+data.to_txt(txt_path,encoding = 'utf-8')
