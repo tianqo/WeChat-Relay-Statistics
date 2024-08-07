@@ -30,7 +30,7 @@ if os.path.exists(directory):
             user_input = input("你输入的不是 '1' 也不是 '2'。请重新输入：")
 else:
     # 如果目录不存在，则打印消息并可能创建它
-    print("这是你首次使用此统计程序，确认使用后将会生成一条UUID，请放置于微信接龙备注的末尾以便识别")
+    print("这是你首次使用此统计程序，使用前请仔细阅读readme文件。确认使用后将会生成一条UUID，请放置于微信接龙备注的末尾以便识别")
     user_input = input("是否进行新一轮统计？\n请输入 'y' 或 'n'：")
     while i < 1:
         if user_input.lower() == 'y':
