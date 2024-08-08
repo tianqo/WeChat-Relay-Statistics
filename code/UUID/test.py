@@ -1,40 +1,25 @@
-def parse_attendance(text):  
-    # 将文本分割成单词列表（这里假设以空格为分隔符）  
-    words = text.split()  
-      
-    # 遍历单词列表，查找“参加”或“不参加”  
-    for word in words:  
-        if word == '参加':  
-            return True  # 表示参加  
-        elif word == '不参加':  
-            return False  # 表示不参加  
-      
-    # 如果没有找到明确的“参加”或“不参加”，可以返回None或抛出异常  
-    return None  # 或者 raise ValueError("Unable to determine attendance")  
-  
-# 示例  
-print(parse_attendance("我要参加"))  # 输出: True  
-print(parse_attendance("我不参加"))  # 输出: False  
-print(parse_attendance("我不想参加"))  # 输出: None （因为没有直接匹配“不参加”）  
-  
-# 对于“我不想参加”的情况，你可能需要调整逻辑来识别否定词  
-def parse_attendance_advanced(text):  
-    words = text.split()  
-      
-    # 检查是否包含否定词后紧接着是“参加”  
-    for i in range(len(words) - 1):  
-        if words[i] in ['不', '没有', '没', '不想'] and words[i+1] == '参加':  
-            return False  
-      
-    # 检查是否包含“参加”  
-    for word in words:  
-        if word == '参加':  
-            return True  
-      
-    # 如果没有找到明确的参加情况，返回None  
-    return None  
-  
-# 使用改进的逻辑  
-print(parse_attendance_advanced("我要参加"))  # 输出: True  
-print(parse_attendance_advanced("我不参加"))  # 输出: False  
-print(parse_attendance_advanced("我不想参加"))  # 输出: False
+import os
+import csv
+import jieba
+
+csv_path = "output.csv"
+txt_path = "code/UUID/yourfile.txt"
+
+if os._exists(txt_path):
+    os.remove(txt_path)
+
+with open(csv_path, "r", encoding="utf-8") as f:
+    reader = csv.reader(f)
+    with open(txt_path, "w", encoding="utf-8") as f1:
+        for row in reader:
+            if len(row) > 1:
+                f1.write(row[1] + "\n")
+
+with open(txt_path, "r", encoding="UTF-8") as f:
+    txt = f.read()
+
+txt1 = list(jieba.cut(txt))
+i = 0
+while i < len(txt1):
+    print(txt1[i])
+    i += 1

@@ -59,7 +59,6 @@ with open('output.csv', 'w', newline='', encoding='utf-8') as csv_file:
 
 # 最后处理
 input_file = 'output.csv'
-output_file = 'corrected_output.csv'
 
 # 使用csv.reader读取文件
 with open(input_file, 'r', newline='', encoding='utf-8') as infile:
