@@ -17,10 +17,14 @@ with open(csv_path, "r", encoding="utf-8") as f:
             if len(row) > 1:
                 f1.write(row[1] + "\n")
 
+line_count = 0
+with open(txt_path, "r", encoding="UTF-8") as f:
+    for _ in f:
+        line_count += 1
 with open(txt_path, "r", encoding="UTF-8") as f:
     txt = f.read()
-
 txt1 = jieba.cut(txt)
+
 # 统计词频
 counts = {}
 for word in txt1:
@@ -70,9 +74,35 @@ while True:
             else:
                 i += 1
         t = y + n
+        if t == line_count:
+            print(str(max_word) + "人数为："+str(y)+"人")
+            print("反之人数为："+str(n)+"人")
+        else:
+            print(str(max_word)+"人数为："+str(y)+"人")
+            print("反之人数为："+str(n)+"人")
+            print("其中有"+str(line_count - t)+"人数据有问题，请自行检查。")
         break
     elif ans == "n":
         print("请输入你想要统计的词：（填入格式请见readme.md）")
-        while True:
-            max_word = input()
+        max_word = input()
+        with open("code/denyword.txt", "r", encoding="UTF-8") as f:
+        #在未经过停用词过滤前，统计该词词频
+            denyword = f.read().splitlines()
+        while len(txt2) - 1 > i:
+            if txt2[i] in denyword and txt2[i+1] == max_word:
+                n += 1
+                i += 2
+            elif txt2[i] == max_word:
+                y += 1
+                i += 1
+            else:
+                i += 1
+        t = y + n
+        if t == line_count:
+            print(str(max_word) + "人数为："+str(y)+"人")
+            print("反之人数为："+str(n)+"人")
+        else:
+            print(str(max_word)+"人数为："+str(y)+"人")
+            print("反之人数为："+str(n)+"人")
+            print("其中有"+str(line_count - t)+"人数据有问题，请自行检查。")           
         break
